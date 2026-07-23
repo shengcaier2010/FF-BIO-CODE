@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Fire Signature Code Tester & Generator</title>
+    <style>
+        :root {
+            --primary-color: #ffb703;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --border-color: #334155;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        p.subtitle {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            background-color: #0f172a;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: #e2e8f0;
+            padding: 12px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 15px;
+            resize: vertical;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .preview-section {
+            margin-top: 25px;
+        }
+
+        .preview-box {
+            background: linear-gradient(135deg, #181e29 0%, #0d1117 100%);
+            border: 2px dashed #475569;
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            word-break: break-all;
+            white-space: pre-wrap;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preview-box::before {
+            content: "PROFILE PREVIEW";
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 9px;
+            color: #475569;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .preview-text {
+            width: 100%;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        button {
+            flex: 1;
+            background-color: var(--primary-color);
+            color: #000;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            font-size: 14px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        button.secondary {
+            background-color: #334155;
+            color: #fff;
+        }
+
+        .quick-codes {
+            margin-top: 30px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        .quick-codes h3 {
+            font-size: 16px;
+            color: #e2e8f0;
+            margin-bottom: 12px;
+        }
+
+        .code-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 8px;
+        }
+
+        .code-btn {
+            background-color: #0f172a;
+            border: 1px solid var(--border-color);
+            color: #94a3b8;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .code-btn:hover {
+            border-color: var(--primary-color);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>FF Signature Previewer</h1>
+    <p class="subtitle">Free Fire Bio Code එක දමා Preview එක තත්‍ය කාලීනව බලන්න</p>
+
+    <div class="input-group">
+        <label for="bioInput">ඔබේ Bio Code එක මෙතනට ඇතුළත් කරන්න:</label>
+        <textarea id="bioInput" placeholder="උදාහරණ: [b][c][FF0000]AWM [FFFF00]KING">[b][c][FF0000]AWM [FFFF00]KING</textarea>
+    </div>
+
+    <div class="controls">
+        <button onclick="copyCode()">Code එක Copy කරන්න</button>
+        <button class="secondary" onclick="clearInput()">මකන්න</button>
+    </div>
+
+    <div class="preview-section">
+        <label>Game එකේ පෙනෙන ආකාරය (Preview):</label>
+        <div class="preview-box">
+            <div id="previewText" class="preview-text"></div>
+        </div>
+    </div>
+
+    <div class="quick-codes">
+        <h3>ක්‍ෂණික Color Codes:</h3>
+        <div class="code-grid">
+            <div class="code-btn" onclick="insertCode('[FF0000]')">🔴 Red</div>
+            <div class="code-btn" onclick="insertCode('[00FF00]')">🟢 Green</div>
+            <div class="code-btn" onclick="insertCode('[0000FF]')">🔵 Blue</div>
+            <div class="code-btn" onclick="insertCode('[FFFF00]')">🟡 Yellow</div>
+            <div class="code-btn" onclick="insertCode('[FF00FF]')">🟣 Pink</div>
+            <div class="code-btn" onclick="insertCode('[00FFFF]')">🩵 Cyan</div>
+            <div class="code-btn" onclick="insertCode('[FFD700]')">🪙 Gold</div>
+            <div class="code-btn" onclick="insertCode('[b]')"><b>B</b> Bold</div>
+            <div class="code-btn" onclick="insertCode('[i]')"><i>I</i> Italic</div>
+            <div class="code-btn" onclick="insertCode('[c]')">↔️ Center</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const bioInput = document.getElementById('bioInput');
+    const previewText = document.getElementById('previewText');
+
+    function parseFFCode(input) {
+        let text = input;
+
+        // Alignment check
+        let isCentered = false;
+        if (text.includes('[c]') || text.includes('[C]')) {
+            isCentered = true;
+            text = text.replace(/\[c\]/gi, '');
+        }
+
+        // Bold & Italic check
+        let isBold = false;
+        let isItalic = false;
+
+        if (text.includes('[b]') || text.includes('[B]')) {
+            isBold = true;
+            text = text.replace(/\[b\]/gi, '');
+        }
+
+        if (text.includes('[i]') || text.includes('[I]')) {
+            isItalic = true;
+            text = text.replace(/\[i\]/gi, '');
+        }
+
+        // Process Colors
+        // Matches [HEXCODE] e.g. [FF0000]
+        const colorRegex = /\[([0-9A-Fa-f]{6})\]/g;
+        
+        let formattedText = "";
+        let lastIndex = 0;
+        let currentColor = "#ffffff";
+        let match;
+
+        while ((match = colorRegex.exec(text)) !== null) {
+            // Text before color code
+            const plainText = text.substring(lastIndex, match.index);
+            if (plainText) {
+                formattedText += `<span style="color: #${currentColor}">${escapeHtml(plainText)}</span>`;
+            }
+            // Update current color
+            currentColor = match[1];
+            lastIndex = colorRegex.lastIndex;
+        }
+
+        // Remaining text
+        const remainingText = text.substring(lastIndex);
+        if (remainingText) {
+            formattedText += `<span style="color: #${currentColor}">${escapeHtml(remainingText)}</span>`;
+        }
+
+        // Apply global formatting wrappers
+        let styles = [];
+        if (isBold) styles.push("font-weight: bold;");
+        if (isItalic) styles.push("font-style: italic;");
+        if (isCentered) styles.push("text-align: center; display: block; width: 100%;");
+
+        return `<div style="${styles.join(' ')}">${formattedText}</div>`;
+    }
+
+    function escapeHtml(str) {
+        return str
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    function updatePreview() {
+        previewText.innerHTML = parseFFCode(bioInput.value);
+    }
+
+    function insertCode(code) {
+        bioInput.value += code;
+        updatePreview();
+    }
+
+    function clearInput() {
+        bioInput.value = '';
+        updatePreview();
+    }
+
+    function copyCode() {
+        bioInput.select();
+        document.execCommand('copy');
+        alert('Code එක Copy කරගත්තා!');
+    }
+
+    bioInput.addEventListener('input', updatePreview);
+    
+    // Initial Render
+    updatePreview();
+</script>
+
+</body>
+</html>
